@@ -1,4 +1,12 @@
-from databases import Database
+import os
 
-DATABASE_URL = "postgresql://postgres.bczothgwhbftneoksqdx:[YOUR-PASSWORD]@aws-0-eu-central-1.pooler.supabase.com:6543/postgres"
+from databases import Database
+from dotenv import load_dotenv
+
+load_dotenv()
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL is not set in the env")
+
 database = Database(DATABASE_URL)
